@@ -214,19 +214,40 @@ function checkidentifian(){
       let identifian;
       do{
         identifian = Number(prompt("Identifiant du trajet :"));
-        if (identifian.length > 0) {
+        if (identifian >= 1 && identifian <= 20 ) {
             return identifian;
         }
         console.log("il faut ecrir le identifiant")
-      }while(identifian== "")
+      }while(identifian == "")
 }
-
+let id_co = 1;
 function Acheter(){
+    let obj = {}
     let name = checkname()
     let identifian = checkidentifian()
-}
+    let seatnbr ;
+    for(let i = 0; i < trips.length;i++){
+        if(trips[i].id == identifian){
+            seatnbr =trips[i].availableSeats
+            trips[i].availableSeats -= 1
 
-function main(){
+            obj.id = id_co++
+            obj.passengerName = name
+            obj.tripId = trips[i].id
+            obj.price = trips[i].price
+            obj.seatNumber = seatnbr;
+             tickets.push(obj);
+            console.log(tickets);
+            break
+         }
+         
+    }
+     
+ }
+ function afficherticke(){
+    let
+ }
+  function main(){
     let n;
     do{ 
         console.log("===============================")
@@ -250,7 +271,8 @@ function main(){
                 Acheter()
                 break;
             case 3:
-
+                console.log(tickets);
+                
                 break;
             case 4:
 
@@ -274,3 +296,5 @@ function main(){
 }
 
 main()
+
+ 
