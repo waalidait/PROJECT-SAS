@@ -245,8 +245,8 @@ function checkidentifian(){
             obj.tripId = trips[i].id
             obj.price = trips[i].price
             obj.seatNumber = seatnbr;
-            obj.dest = trips[i].destination
-            obj.arriv = trips[i].departure
+            obj.dest = trips[i].departure
+            obj.arriv = trips[i].destination
             tickets.push(obj);
 
             console.log("======Ticket acheté avec succès.====");
@@ -321,6 +321,15 @@ function checkidentifian(){
     }
  }
 
+ function Filtrer(){
+    let ville = prompt("entret le nom de depart ")
+    for(let i = 0; i < trips.length ;i++){
+        if(trips[i].departure == ville ){
+            console.log(`${trips[i].departure} --> ${trips[i].destination}`)
+        }
+    }
+ }
+
   function main(){
     let n;
     do{ 
@@ -354,7 +363,7 @@ function checkidentifian(){
                  Rechercher()
                 break;
             case 6:
-
+                 Filtrer()
                 break;
             case 7:
 
