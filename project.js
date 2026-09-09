@@ -223,8 +223,8 @@ function checkidentifian(){
  
        }while(identifian == "" || identifian > 20 || identifian <= 0)
 }
-let id_co = 1;
-function Acheter(){
+    let id_co = 1;
+    function Acheter(){
     let obj = {}
     let name = checkname()
     let identifian = checkidentifian()
@@ -287,7 +287,39 @@ function Acheter(){
    }
  }
 
- 
+ function annuletickes(){
+    let ann = prompt("ecrir le id de ticket: ")
+    let ticket;
+    let index;
+    for(let i = 0; i < tickets.length;i++){
+        if(tickets[i].id == ann){
+           ticket = tickets[i]
+           break;
+        }
+    }
+     index = tickets.indexOf(ticket)
+     console.log(index)
+
+     tickets.splice(index, 1)
+
+    console.log("Ticket annulé avec succès.")
+
+ }
+ function Rechercher(){
+    let nom = prompt("ecrir le nom : ")
+    for(let i = 0;i < tickets.length; i++){
+        if(tickets[i].passengerName == nom){
+       console.log("===tickes===")
+       console.log("")
+       console.log(`ticket#${tickets[i].tripId}`);
+       console.log(`passager :${tickets[i].passengerName}`);
+       console.log(`trajet :${tickets[i].dest} --> ${tickets[i].arriv}`);
+       console.log(`place :${tickets[i].seatNumber}`);
+       console.log(`prix : ${tickets[i].price}`);
+       console.log("")
+        }
+    }
+ }
 
   function main(){
     let n;
@@ -316,10 +348,10 @@ function Acheter(){
                 affichetickes()                
                 break;
             case 4:
-
+                annuletickes()
                 break;
             case 5:
-
+                 Rechercher()
                 break;
             case 6:
 
