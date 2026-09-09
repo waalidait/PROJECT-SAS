@@ -232,7 +232,7 @@ function Acheter(){
     let seatnbr ;
     for(let i = 0; i < trips.length;i++){
 
-         if(trips[i].availableSeats == 0){
+         if(trips[i].id == identifian && trips[i].availableSeats == 0){
             console.log("Trajet complet.")
          }
 
@@ -264,11 +264,31 @@ function Acheter(){
           
          
     }
+    
      
  }
- function afficherticke(){
-    let
+  
+ function affichetickes(){
+   let objticket=tickets;
+   if(objticket == ""){
+            console.log("Aucun ticket enregistré.");
+        }
+      for(let i = 0; i < objticket.length; i++){
+         
+       console.log("=== TICKETS ===")
+
+       console.log(`ticket#${objticket[i].tripId}`);
+       console.log(`passager :${objticket[i].passengerName}`);
+       console.log(`trajet :${objticket[i].dest} --> ${objticket[i].arriv}`);
+       console.log(`place :${objticket[i].seatNumber}`);
+       console.log(`prix : ${objticket[i].price}`);
+       console.log("");
+       
+   }
  }
+
+ 
+
   function main(){
     let n;
     do{ 
@@ -293,8 +313,7 @@ function Acheter(){
                 Acheter()
                 break;
             case 3:
-                console.log(tickets);
-                
+                affichetickes()                
                 break;
             case 4:
 
