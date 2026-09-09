@@ -183,6 +183,9 @@ const trips = [
     }
 ];
 
+const tickets = [];
+
+//fun qui affiche les trajets
 function afficher(){
      console.log("=== TRAJETS DISPONIBLES ===");
      for(let i = 0;i<trips.length;i++){
@@ -192,13 +195,37 @@ function afficher(){
         console.log(`Prix ${trips[i].price}`)
         console.log(`place disponible ${trips[i].availableSeats}`)
         console.log("");
-        console.log("");
-
-        
-        
-        
+        console.log("");  
     }
 }
+
+function checkname(){
+    let nom 
+      do{
+        nom = prompt("Nom du passager :")
+         if (nom.length > 0 ) {
+            return nom;
+        }
+        console.log("il faut ecrir le nom ")
+     }while(nom == "")
+}
+
+function checkidentifian(){
+      let identifian;
+      do{
+        identifian = Number(prompt("Identifiant du trajet :"));
+        if (identifian.length > 0) {
+            return identifian;
+        }
+        console.log("il faut ecrir le identifiant")
+      }while(identifian== "")
+}
+
+function Acheter(){
+    let name = checkname()
+    let identifian = checkidentifian()
+}
+
 function main(){
     let n;
     do{ 
@@ -220,7 +247,7 @@ function main(){
                 afficher()
                 break;
             case 2:
-
+                Acheter()
                 break;
             case 3:
 
