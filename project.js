@@ -224,7 +224,8 @@ function checkidentifian(){
        }while(identifian == "" || identifian > 20 || identifian <= 0)
 }
     let id_co = 1;
-    function Acheter(){
+
+function Acheter(){
     let obj = {}
     let name = checkname()
     let identifian = checkidentifian()
@@ -252,7 +253,7 @@ function checkidentifian(){
             console.log("======Ticket acheté avec succès.====");
             console.log("=====================================");
             console.log("");
-            console.log(`ticke#${obj.tripId}`);
+            console.log(`ticke#${obj.id}`);
             console.log(`Passager: ${obj.passengerName}`);
             console.log(`trajet: ${obj.dest} --> ${obj.arriv}`);
             console.log(`place : ${obj.seatNumber}`)
@@ -277,7 +278,7 @@ function checkidentifian(){
          
        console.log("=== TICKETS ===")
 
-       console.log(`ticket#${objticket[i].tripId}`);
+       console.log(`ticket#${objticket[i].id}`);
        console.log(`passager :${objticket[i].passengerName}`);
        console.log(`trajet :${objticket[i].dest} --> ${objticket[i].arriv}`);
        console.log(`place :${objticket[i].seatNumber}`);
@@ -288,22 +289,28 @@ function checkidentifian(){
  }
 
  function annuletickes(){
-    let ann = prompt("ecrir le id de ticket: ")
-    let ticket;
-    let index;
+    if(tickets.length == 0){
+        console.log("aucun tickets exist")
+        return;
+    }
+
+    let ann = Number(prompt("ecrir le id de ticket: "))
     for(let i = 0; i < tickets.length;i++){
         if(tickets[i].id == ann){
-           ticket = tickets[i]
-           break;
+
+         for(let j = 0; j < trips.length;j++){
+                 if(tickets[i].tripId == trips[j].id){
+                   trips[j].availableSeats +=1;
+            }
+         }
+             
+            tickets.splice(i,1)
+            console.log("Ticket annulé avec succès.")
+            return;
         }
-    }
-     index = tickets.indexOf(ticket)
-     console.log(index)
-
-     tickets.splice(index, 1)
-
-    console.log("Ticket annulé avec succès.")
-
+          
+    } 
+    console.log("ticket ma kynach");
  }
  function Rechercher(){
     let nom = prompt("ecrir le nom : ")
@@ -371,7 +378,10 @@ function checkidentifian(){
             case 0:
 
                 break;
-        }
+            default:
+                console.log("Votre reposne n'etait pas acceptable, Svp donne moi une valeur entre 1 et 7");
+
+         }
     }while(n!==0)
 
          
