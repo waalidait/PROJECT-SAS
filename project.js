@@ -192,8 +192,8 @@ function afficher(){
         console.log(`#${trips[i].id} ${trips[i].departure} -> ${trips[i].destination}`);
         console.log(`depart: ${trips[i].departureTime}`);
         console.log(`arrive: ${trips[i].arrivalTime}`);
-        console.log(`Prix ${trips[i].price}`)
-        console.log(`place disponible ${trips[i].availableSeats}`)
+        console.log(`Prix: ${trips[i].price}`)
+        console.log(`place disponible: ${trips[i].availableSeats}`)
         console.log("");
         console.log("");  
     }
@@ -202,7 +202,7 @@ function afficher(){
 function checkname(){
     let nom 
       do{
-        nom = prompt("Nom du passager :")
+        nom = prompt("Nom du passager: ")
          if (nom.length > 0 ) {
             return nom;
         }
@@ -213,7 +213,7 @@ function checkname(){
 function checkidentifian(){
       let identifian;
       do{
-        identifian = Number(prompt("Identifiant du trajet :"));
+        identifian = Number(prompt("Identifiant du trajet: "));
         if (identifian >= 1 && identifian <= 20 ) {
             return identifian;
         }
@@ -313,7 +313,11 @@ function Acheter(){
     console.log("ticket ma kynach");
  }
  function Rechercher(){
+    if(tickets.length == 0){
+        return console.log("est vid")
+    }
     let nom = prompt("ecrir le nom : ")
+     
     for(let i = 0;i < tickets.length; i++){
         if(tickets[i].passengerName == nom){
        console.log("===tickes===")
@@ -330,13 +334,31 @@ function Acheter(){
 
  function Filtrer(){
     let ville = prompt("entret le nom de depart ")
+    let ok = true;
     for(let i = 0; i < trips.length ;i++){
-        if(trips[i].departure == ville ){
+
+        if(trips[i].departure === ville ){
             console.log(`${trips[i].departure} --> ${trips[i].destination}`)
+            ok = false;
         }
     }
- }
+    if(ok == true){
+        console.log("ma kaynach had lmdina ")
+    }
+  }
 
+function trier(){
+    for(let i = 0; i < trips.length; i++){
+        for(let j = i + 1;j < trips.length;j++){
+            if(trips[i].price > trips[j].price){
+                let tmp = trips[i]
+                trips[i] = trips[j]
+                trips[j] = tmp
+            }
+        }
+    }
+
+}
   function main(){
     let n;
     do{ 
@@ -352,8 +374,8 @@ function Acheter(){
         console.log("7. Trier les trajets");
         console.log("0. Quitter")
         n = Number(prompt("Tapez un choix (1-6)"))
-            
-        switch(n){
+
+         switch(n){
             case 1:
                 afficher()
                 break;
@@ -367,19 +389,21 @@ function Acheter(){
                 annuletickes()
                 break;
             case 5:
-                 Rechercher()
+                  Rechercher()
                 break;
             case 6:
                  Filtrer()
                 break;
             case 7:
-
+                 trier()
+                 afficher()
                 break;
             case 0:
 
                 break;
             default:
                 console.log("Votre reposne n'etait pas acceptable, Svp donne moi une valeur entre 1 et 7");
+             break;
 
          }
     }while(n!==0)
