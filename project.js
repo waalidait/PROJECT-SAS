@@ -198,7 +198,7 @@ function afficher(){
         console.log("");  
     }
 }
-
+// fun qui check name
 function checkname(){
     let nom 
       do{
@@ -223,6 +223,7 @@ function checkidentifian(){
  
        }while(identifian == "" || identifian > 20 || identifian <= 0)
 }
+
     let id_co = 1;
 
 function Acheter(){
@@ -238,35 +239,31 @@ function Acheter(){
          }
 
         else if(trips[i].id == identifian){
-            seatnbr = trips[i].availableSeats
-            trips[i].availableSeats -= 1
+                 seatnbr = trips[i].availableSeats
+                 trips[i].availableSeats -= 1
 
-            obj.id = id_co++
-            obj.passengerName = name
-            obj.tripId = trips[i].id
-            obj.price = trips[i].price
-            obj.seatNumber = seatnbr;
-            obj.dest = trips[i].departure
-            obj.arriv = trips[i].destination
-            tickets.push(obj);
+                 obj.id = id_co++
+                 obj.passengerName = name
+                 obj.tripId = trips[i].id
+                 obj.price = trips[i].price
+                 obj.seatNumber = seatnbr;
+                 obj.dest = trips[i].departure
+                 obj.arriv = trips[i].destination
+                 tickets.push(obj);
 
-            console.log("======Ticket acheté avec succès.====");
-            console.log("=====================================");
-            console.log("");
-            console.log(`ticke#${obj.id}`);
-            console.log(`Passager: ${obj.passengerName}`);
-            console.log(`trajet: ${obj.dest} --> ${obj.arriv}`);
-            console.log(`place : ${obj.seatNumber}`)
-            console.log(`prix : ${obj.price}`)
-            console.log("");
-            console.log("=====================================");
-             break
+                 console.log("======Ticket acheté avec succès.====");
+                 console.log("=====================================");
+                 console.log("");
+                 console.log(`ticke#${obj.id}`);
+                 console.log(`Passager: ${obj.passengerName}`);
+                 console.log(`trajet: ${obj.dest} --> ${obj.arriv}`);
+                 console.log(`place : ${obj.seatNumber}`)
+                 console.log(`prix : ${obj.price}`)
+                 console.log("");
+                 console.log("=====================================");
+                  break
          }
-          
-         
     }
-    
-     
  }
   
  function affichetickes(){
@@ -289,28 +286,37 @@ function Acheter(){
  }
 
  function annuletickes(){
+    let tripId = 0;
     if(tickets.length == 0){
+        console.log("=====================");
         console.log("aucun tickets exist")
+        console.log("=====================");
+
         return;
     }
+    let annuler = Number(prompt("ecrir le id de ticket: "))
 
-    let ann = Number(prompt("ecrir le id de ticket: "))
     for(let i = 0; i < tickets.length;i++){
-        if(tickets[i].id == ann){
-
-         for(let j = 0; j < trips.length;j++){
-                 if(tickets[i].tripId == trips[j].id){
-                   trips[j].availableSeats +=1;
-            }
-         }
-             
+        if(tickets[i].id == annuler){
+            tripId = tickets[i].tripId
             tickets.splice(i,1)
+            console.log("==========================");
             console.log("Ticket annulé avec succès.")
-            return;
+            console.log("==========================");
+            break
         }
           
     } 
-    console.log("ticket ma kynach");
+    if(tripId == 0) {
+        return console.log("id introvable")
+    }
+    for(let j = 0; j < trips.length;j++){
+        if(tripId == trips[j].id){
+            trips[j].availableSeats +=1;
+        }
+    }
+
+
  }
  function Rechercher(){
     if(tickets.length == 0){
@@ -338,12 +344,12 @@ function Acheter(){
     for(let i = 0; i < trips.length ;i++){
 
         if(trips[i].departure === ville ){
-            console.log(`${trips[i].departure} --> ${trips[i].destination}`)
+            console.log(`${trips[i].departure} --> ${trips[i].destination} : ${trips[i].price}DH`)
             ok = false;
         }
     }
     if(ok == true){
-        console.log("ma kaynach had lmdina ")
+        console.log("cette ville est introvable")
     }
   }
 
@@ -357,8 +363,12 @@ function trier(){
             }
         }
     }
-
 }
+
+function totaltickets(){
+     console.log(`nombre total de tickets : ${tickets.length}`);
+}
+
   function main(){
     let n;
     do{ 
@@ -372,6 +382,7 @@ function trier(){
         console.log("5. Rechercher un ticket");
         console.log("6. Filtrer les trajets");
         console.log("7. Trier les trajets");
+        console.log("8. total ticket");
         console.log("0. Quitter")
         n = Number(prompt("Tapez un choix (1-6)"))
 
@@ -397,6 +408,9 @@ function trier(){
             case 7:
                  trier()
                  afficher()
+                break;
+            case 8:
+                totaltickets()
                 break;
             case 0:
 
