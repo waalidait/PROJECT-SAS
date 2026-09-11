@@ -203,12 +203,13 @@ function checkname(){
     let nom 
       do{
         nom = prompt("Nom du passager: ")
-         if (nom.length > 0 ) {
+         if (nom.trim().length > 0 ) {
             return nom;
         }
         console.log("il faut ecrir le nom ")
      }while(nom == "")
 }
+
 
 function checkidentifian(){
       let identifian;
@@ -223,6 +224,7 @@ function checkidentifian(){
  
        }while(identifian == "" || identifian > 20 || identifian <= 0)
 }
+
 
     let id_co = 1;
 
@@ -266,6 +268,7 @@ function Acheter(){
     }
  }
   
+
  function affichetickes(){
    let objticket=tickets;
    if(objticket == ""){
@@ -285,21 +288,21 @@ function Acheter(){
    }
  }
 
+
   function annuletickes(){
     let tripId = 0;
     if(tickets.length == 0){
         console.log("=====================");
         console.log("aucun tickets exist")
         console.log("=====================");
-
         return;
     }
     let annuler = Number(prompt("ecrir le id de ticket: "))
 
     for(let i = 0; i < tickets.length;i++){
         if(tickets[i].id == annuler){
-            tripId = tickets[i].tripId
-             tickets.splice(i,1)
+            tripId = tickets[i].tripId 
+            tickets.splice(i,1)
             console.log("==========================");
             console.log("Ticket annulé avec succès.")
             console.log("==========================");
@@ -323,7 +326,7 @@ function Acheter(){
         return console.log("est vid")
     }
     let nom = prompt("ecrir le nom : ")
-     
+     let check = false;
     for(let i = 0;i < tickets.length; i++){
         if(tickets[i].passengerName == nom){
        console.log("===tickes===")
@@ -334,16 +337,20 @@ function Acheter(){
        console.log(`place :${tickets[i].seatNumber}`);
        console.log(`prix : ${tickets[i].price}`);
        console.log("")
+       check = true;
         }
+    }
+    if(check == false){
+        console.log("cette name il ne exist pas.");
     }
  }
 
  function Filtrer(){
-    let ville = prompt("entret le nom de depart ")
+    let ville = prompt("entret le nom de depart: ")
     let ok = true;
     for(let i = 0; i < trips.length ;i++){
 
-        if(trips[i].departure === ville ){
+        if(trips[i].departure.toLowerCase() === ville.toLowerCase() ){
             console.log(`${trips[i].departure} --> ${trips[i].destination} : ${trips[i].price}DH`)
             ok = false;
         }
@@ -377,31 +384,7 @@ function prixtotal(tick){
     }
     console.log(total)
 }
-// function sorttickest(){
-//     let tick = tickets
-//     for(let i = 0; i < tick.length; i++){
-//         for(let j = i + 1;j < tick.length;j++){
-//             if(tick[i].price > tick[j].price){
-//                 let tmp = tick[i]
-//                 tick[i] = tick[j]
-//                 tick[j] = tmp
-//             }
-//         }
-//     }
-//      for(let i = 0; i < tick.length; i++){
-         
-//        console.log("=== TICKETS ===")
-
-//        console.log(`ticket#${tick[i].id}`);
-//        console.log(`passager :${tick[i].passengerName}`);
-//        console.log(`trajet :${tick[i].dest} --> ${tick[i].arriv}`);
-//        console.log(`place :${tick[i].seatNumber}`);
-//        console.log(`prix : ${tick[i].price}`);
-//        console.log("");
-       
-//    }
-
-// }
+ 
   function main(){
     let n;
     do{ 
@@ -418,7 +401,7 @@ function prixtotal(tick){
         console.log("8. total ticket");
         console.log("9. Chiffre d'affaires total")
         console.log("0. Quitter")
-        n = Number(prompt("Tapez un choix (1-6)"))
+        n = Number(prompt("Tapez un choix (1-6): "))
 
          switch(n){
             case 1:
